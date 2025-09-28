@@ -3,34 +3,27 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Pawn.h"
-#include "TTT_GameInstance.h"
 #include "TTT_PlayerInterface.h"
-#include "Camera/CameraComponent.h"
+#include "TTT_GameInstance.h"
+#include "Tile.h"
 #include "Kismet/GameplayStatics.h"
-#include "TTT_HumanPlayer.generated.h"
+#include "GameFramework/Pawn.h"
+#include "TTT_MinmaxPlayer.generated.h"
 
 UCLASS()
-class TICTACTOE_UE56_API ATTT_HumanPlayer : public APawn, public ITTT_PlayerInterface
+class TICTACTOE_UE56_API ATTT_MinmaxPlayer : public APawn, public ITTT_PlayerInterface
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this pawn's properties
-	ATTT_HumanPlayer();
+	ATTT_MinmaxPlayer();
 
-	// camera component attacched to player pawn
-	UCameraComponent* Camera;
-
-	// game instance reference
 	UTTT_GameInstance* GameInstance;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-	// keeps track of turn
-	bool IsMyTurn = false;
 
 public:	
 	// Called every frame
@@ -43,8 +36,9 @@ public:
 	virtual void OnWin() override;
 	virtual void OnLose() override;
 
-	// called on left mouse click (binding)
-	UFUNCTION()
-	void OnClick();
+	int32 EvaluateGrid(TMap<FVector2D, ATile*>& Board);
+	bool IsMovesLeft(TMap<FVector2D, ATile*>& Board);
+	int32 MiniMax(TMap<FVector2D, ATile*>& Board, int32 Depth, bool IsMax);
+	FVector2D FindBestMove(TMap<FVector2D, ATile*>& Board);
 
 };
