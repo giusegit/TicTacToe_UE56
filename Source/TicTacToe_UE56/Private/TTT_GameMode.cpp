@@ -5,7 +5,7 @@
 #include "TTT_PlayerController.h"
 #include "TTT_HumanPlayer.h"
 #include "TTT_RandomPlayer.h"
-//#include "TTT_MinimaxPlayer.h"
+#include "TTT_MinmaxPlayer.h"
 #include "EngineUtils.h"
 
 ATTT_GameMode::ATTT_GameMode()
@@ -57,11 +57,12 @@ void ATTT_GameMode::BeginPlay()
 
 	// Human player = 0
 	Players.Add(HumanPlayer);
+
 	// Random Player
 	auto* AI = GetWorld()->SpawnActor<ATTT_RandomPlayer>(FVector(), FRotator());
 
 	// MiniMax Player
-	//auto* AI = GetWorld()->SpawnActor<ATTT_MinimaxPlayer>(FVector(), FRotator());
+	//auto* AI = GetWorld()->SpawnActor<ATTT_MinmaxPlayer>(FVector(), FRotator());
 
 	// AI player = 1
 	Players.Add(AI);

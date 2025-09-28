@@ -19,6 +19,8 @@ public:
 	// Sets default values for this pawn's properties
 	ATTT_RandomPlayer();
 
+	UTTT_GameInstance* GameInstance;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -29,5 +31,9 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	virtual void OnTurn() override;
+	virtual void OnWin() override;
+	virtual void OnLose() override;
 
 };

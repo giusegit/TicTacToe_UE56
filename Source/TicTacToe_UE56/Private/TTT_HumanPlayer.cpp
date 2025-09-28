@@ -52,20 +52,20 @@ void ATTT_HumanPlayer::OnTurn()
 {
 	IsMyTurn = true;
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Your Turn"));
-	//GameInstance->SetTurnMessage(TEXT("Human Turn"));
+	GameInstance->SetTurnMessage(TEXT("Human Turn"));
 }
 
 void ATTT_HumanPlayer::OnWin()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("You Win!"));
-	//GameInstance->SetTurnMessage(TEXT("Human Wins!"));
-	//GameInstance->IncrementScoreHumanPlayer();
+	GameInstance->SetTurnMessage(TEXT("Human Wins!"));
+	GameInstance->IncrementScoreHumanPlayer();
 }
 
 void ATTT_HumanPlayer::OnLose()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("You Lose!"));
-	//GameInstance->SetTurnMessage(TEXT("Human Loses!"));
+	GameInstance->SetTurnMessage(TEXT("Human Loses!"));
 }
 
 void ATTT_HumanPlayer::OnClick()
