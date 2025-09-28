@@ -46,9 +46,9 @@ void AGameField::ResetField()
 	OnResetEvent.Broadcast();
 
 	ATTT_GameMode* GameMode = Cast<ATTT_GameMode>(GetWorld()->GetAuthGameMode());
-	//GameMode->IsGameOver = false;
-	//GameMode->MoveCounter = 0;
-	//GameMode->ChoosePlayerAndStartGame();
+	GameMode->IsGameOver = false;
+	GameMode->MoveCounter = 0;
+	GameMode->ChoosePlayerAndStartGame();
 }
 
 void AGameField::GenerateField()
