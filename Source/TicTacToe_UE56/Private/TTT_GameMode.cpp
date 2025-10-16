@@ -58,8 +58,12 @@ void ATTT_GameMode::BeginPlay()
 	// Human player = 0
 	Players.Add(HumanPlayer);
 
+	TSubclassOf<APawn> AIClassToSpawn = GetWorld()->GetGameInstance<UTTT_GameInstance>()->SelectedAIClass;
+
+	auto* AI = GetWorld()->SpawnActor<ITTT_PlayerInterface>(AIClassToSpawn);
+
 	// Random Player
-	auto* AI = GetWorld()->SpawnActor<ATTT_RandomPlayer>(FVector(), FRotator());
+	//auto* AI = GetWorld()->SpawnActor<ATTT_RandomPlayer>(FVector(), FRotator());
 
 	// MiniMax Player
 	//auto* AI = GetWorld()->SpawnActor<ATTT_MinmaxPlayer>(FVector(), FRotator());

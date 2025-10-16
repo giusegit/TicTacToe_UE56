@@ -6,6 +6,7 @@
 #include "Engine/GameInstance.h"
 #include "TTT_GameInstance.generated.h"
 
+class APawn;
 /**
  * 
  */
@@ -26,6 +27,9 @@ public:
 	// message to show every turn
 	UPROPERTY(EditAnywhere)
 	FString CurrentTurnMessage = "Current Player";
+
+	UPROPERTY(BlueprintReadWrite)
+	TSubclassOf<APawn> SelectedAIClass;
 
 	// increment the score for human player
 	void IncrementScoreHumanPlayer();
