@@ -20,6 +20,15 @@ void ATTT_MinmaxPlayer::BeginPlay()
 	
 }
 
+void ATTT_MinmaxPlayer::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	Super::EndPlay(EndPlayReason);
+
+	// ANNULLA IL TIMER!
+	// Questo impedisce che la funzione venga eseguita dopo che il mondo è stato distrutto.
+	GetWorld()->GetTimerManager().ClearTimer(AI_TurnTimerHandle);
+}
+
 // Called every frame
 void ATTT_MinmaxPlayer::Tick(float DeltaTime)
 {
@@ -39,9 +48,7 @@ void ATTT_MinmaxPlayer::OnTurn()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("AI (Minimax) Turn"));
 	GameInstance->SetTurnMessage(TEXT("AI (Minimax) Turn"));
 
-	FTimerHandle TimerHandle;
-
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle, [&]()
+	GetWorld()->GetTimerManager().SetTimer(AI_TurnTimerHandle, [&]()
 		{
 			ATTT_GameMode* GameMode = (ATTT_GameMode*)(GetWorld()->GetAuthGameMode());
 

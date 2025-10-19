@@ -25,6 +25,8 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -40,5 +42,9 @@ public:
 	bool IsMovesLeft(TMap<FVector2D, ATile*>& Board);
 	int32 MiniMax(TMap<FVector2D, ATile*>& Board, int32 Depth, bool IsMax);
 	FVector2D FindBestMove(TMap<FVector2D, ATile*>& Board);
+
+private:
+
+	FTimerHandle AI_TurnTimerHandle;
 
 };

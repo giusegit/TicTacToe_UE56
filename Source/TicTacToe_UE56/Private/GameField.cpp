@@ -37,18 +37,24 @@ void AGameField::BeginPlay()
 
 void AGameField::ResetField()
 {
-	for (ATile* Obj : TileArray)
+	if (GetWorld())
 	{
-		Obj->SetTileStatus(NOT_ASSIGNED, ETileStatus::EMPTY);
+		for (ATile* Obj : TileArray)
+		{
+			Obj->SetTileStatus(NOT_ASSIGNED, ETileStatus::EMPTY);
+		}
+
+		// send broadcast event to registered objects 
+		OnResetEvent.Broadcast();
+
+		ATTT_GameMode* GameMode = Cast<ATTT_GameMode>(GetWorld()->GetAuthGameMode());
+		if (GameMode)
+		{
+			GameMode->IsGameOver = false;
+			GameMode->MoveCounter = 0;
+			GameMode->ChoosePlayerAndStartGame();
+		}
 	}
-
-	// send broadcast event to registered objects 
-	OnResetEvent.Broadcast();
-
-	ATTT_GameMode* GameMode = Cast<ATTT_GameMode>(GetWorld()->GetAuthGameMode());
-	GameMode->IsGameOver = false;
-	GameMode->MoveCounter = 0;
-	GameMode->ChoosePlayerAndStartGame();
 }
 
 void AGameField::GenerateField()

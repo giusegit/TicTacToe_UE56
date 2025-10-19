@@ -23,6 +23,12 @@ int32 UTTT_GameInstance::GetScoreAiPlayer()
 	return ScoreAiPlayer;
 }
 
+void UTTT_GameInstance::ResetScores()
+{
+	ScoreHumanPlayer = 0;
+	ScoreAiPlayer = 0;
+}
+
 FString UTTT_GameInstance::GetTurnMessage()
 {
 	return CurrentTurnMessage;

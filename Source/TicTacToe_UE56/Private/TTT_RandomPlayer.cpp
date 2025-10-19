@@ -18,6 +18,15 @@ void ATTT_RandomPlayer::BeginPlay()
 	
 }
 
+void ATTT_RandomPlayer::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	Super::EndPlay(EndPlayReason);
+
+	// ANNULLA IL TIMER!
+	// Questo impedisce che la funzione venga eseguita dopo che il mondo è stato distrutto.
+	GetWorld()->GetTimerManager().ClearTimer(AI_TurnTimerHandle);
+}
+
 // Called every frame
 void ATTT_RandomPlayer::Tick(float DeltaTime)
 {
@@ -37,9 +46,7 @@ void ATTT_RandomPlayer::OnTurn()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("AI (Random) Turn"));
 	GameInstance->SetTurnMessage(TEXT("AI (Random) Turn"));
 
-	FTimerHandle TimerHandle;
-
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle, [&]()
+	GetWorld()->GetTimerManager().SetTimer(AI_TurnTimerHandle, [&]()
 		{
 			TArray<ATile*> FreeCells;
 			ATTT_GameMode* GameMode = (ATTT_GameMode*)(GetWorld()->GetAuthGameMode());

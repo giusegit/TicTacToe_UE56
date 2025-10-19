@@ -45,6 +45,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	int32 GetScoreAiPlayer();
 
+	// reset scores
+	UFUNCTION(BlueprintCallable)
+	void ResetScores();
+
 	// get the current turn message
 	UFUNCTION(BlueprintCallable)
 	FString GetTurnMessage();
