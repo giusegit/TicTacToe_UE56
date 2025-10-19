@@ -74,6 +74,15 @@ void ATTT_GameMode::BeginPlay()
 	this->ChoosePlayerAndStartGame();
 }
 
+void ATTT_GameMode::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	Super::EndPlay(EndPlayReason);
+
+	// ANNULLA IL TIMER!
+	// Questo impedisce che la funzione nel timer venga eseguita dopo che il mondo è stato distrutto.
+	GetWorld()->GetTimerManager().ClearTimer(ResetTimerHandle);
+}
+
 void ATTT_GameMode::ChoosePlayerAndStartGame()
 {
 	CurrentPlayer = FMath::RandRange(0, Players.Num() - 1);
@@ -113,9 +122,8 @@ void ATTT_GameMode::SetCellSign(const int32 PlayerNumber, const FVector& SpawnPo
 	else if (MoveCounter == (FieldSize * FieldSize))
 	{
 		// add a timer (3 seconds)
-		FTimerHandle TimerHandle;
-
-		GetWorld()->GetTimerManager().SetTimer(TimerHandle, [&]()
+	
+		GetWorld()->GetTimerManager().SetTimer(ResetTimerHandle, [&]()
 			{
 				// function to delay
 				GField->ResetField();

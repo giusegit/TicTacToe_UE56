@@ -25,7 +25,7 @@ void ATTT_MinmaxPlayer::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	Super::EndPlay(EndPlayReason);
 
 	// ANNULLA IL TIMER!
-	// Questo impedisce che la funzione venga eseguita dopo che il mondo è stato distrutto.
+	// Questo impedisce che la funzione nel timer venga eseguita dopo che il mondo è stato distrutto.
 	GetWorld()->GetTimerManager().ClearTimer(AI_TurnTimerHandle);
 }
 
