@@ -6,6 +6,7 @@
 #include "TTT_PlayerInterface.h"
 #include "GameField.h"
 #include "GameFramework/GameModeBase.h"
+#include "TTT_ConfigData.h"
 #include "TTT_GameMode.generated.h"
 
 class AActor;
@@ -34,7 +35,7 @@ public:
 	TSubclassOf<AGameField> GameFieldClass;
 
 	// field size
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	int32 FieldSize;
 
 	// reference to a GameField object
@@ -46,6 +47,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<AActor> SignOActor;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Config")
+	UTTT_ConfigData* GridData;
 
 	ATTT_GameMode();
 

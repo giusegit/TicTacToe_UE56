@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Tile.h"
 #include "GameFramework/Actor.h"
+#include "TTT_ConfigData.h"
 #include "GameField.generated.h"
 
 // macro declaration for a dynamic multicast delegate
@@ -35,11 +36,11 @@ public:
 	FOnReset OnResetEvent;
 
 	// size of field
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	int32 Size;
 
 	// size of winning line
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	int32 WinSize;
 
 	// TSubclassOf template class that provides UClass type safety
@@ -47,12 +48,15 @@ public:
 	TSubclassOf<ATile> TileClass;
 
 	// tile padding percentage
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	float CellPadding;
 
 	// tile size
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	float TileSize;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Config")
+	UTTT_ConfigData* GridData;
 
 	// Sets default values for this actor's properties
 	AGameField();

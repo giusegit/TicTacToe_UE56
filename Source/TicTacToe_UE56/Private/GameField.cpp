@@ -11,19 +11,23 @@ AGameField::AGameField()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-	// size of winnning line
-	WinSize = 3;
-	// size of the field (3x3)
-	Size = 3;
-	// tile dimension
-	TileSize = 120.f;
-	// tile padding percentage 
-	CellPadding = 0.2f;
 }
 
 void AGameField::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
+	if (GridData)
+	{
+		Size = GridData->GridSize;
+		WinSize = Size;
+		TileSize = GridData->TileSize;
+		CellPadding = GridData->CellPadding;
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("GridData has not been assigned."));
+		return;
+	}
 	//normalized tilepadding
 	NextCellPositionMultiplier = (TileSize + TileSize * CellPadding) / TileSize;
 }

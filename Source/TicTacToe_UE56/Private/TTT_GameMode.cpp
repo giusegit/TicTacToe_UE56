@@ -12,7 +12,6 @@ ATTT_GameMode::ATTT_GameMode()
 {
 	PlayerControllerClass = ATTT_PlayerController::StaticClass();
 	DefaultPawnClass = ATTT_HumanPlayer::StaticClass();
-	FieldSize = 3;
 }
 
 void ATTT_GameMode::BeginPlay()
@@ -32,10 +31,19 @@ void ATTT_GameMode::BeginPlay()
 		return;
 	}
 
+	if (GridData)
+	{
+		FieldSize = GridData->GridSize;
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("GridData has not been assigned.") );
+		return;
+	}
+
 	if (GameFieldClass != nullptr)
 	{
 		GField = GetWorld()->SpawnActor<AGameField>(GameFieldClass);
-		GField->Size = FieldSize;
 	}
 	else
 	{
