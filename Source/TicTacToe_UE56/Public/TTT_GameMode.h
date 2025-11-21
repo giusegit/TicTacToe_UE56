@@ -35,8 +35,13 @@ public:
 	TSubclassOf<AGameField> GameFieldClass;
 
 	// field size
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	int32 FieldSize;
+
+	// tile padding percentage
+	float CellPadding;
+
+	// tile size
+	float TileSize;
 
 	// reference to a GameField object
 	UPROPERTY(VisibleAnywhere)

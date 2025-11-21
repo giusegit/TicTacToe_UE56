@@ -34,6 +34,8 @@ void ATTT_GameMode::BeginPlay()
 	if (GridData)
 	{
 		FieldSize = GridData->GridSize;
+		TileSize = GridData->TileSize;
+		CellPadding = GridData->CellPadding;
 	}
 	else
 	{
@@ -51,7 +53,7 @@ void ATTT_GameMode::BeginPlay()
 		return;
 	}
 
-	float CameraPosX = ((GField->TileSize * FieldSize) + ((FieldSize - 1) * GField->TileSize * GField->CellPadding)) * 0.5f;
+	float CameraPosX = ((TileSize * FieldSize) + ((FieldSize - 1) * TileSize * CellPadding)) * 0.5f;
 
 	FVector CameraPos(CameraPosX, CameraPosX, 1000.0f);
 	HumanPlayer->SetActorLocationAndRotation(CameraPos, FRotationMatrix::MakeFromX(FVector(0, 0, -1)).Rotator());
